@@ -6,26 +6,27 @@ using System.Threading.Tasks;
 
 namespace FreecellApp.Services
 {
-    public class MockDataStore : IDataStore<Card> {
-        private IOrderedEnumerable<Card> items {
+    public class DataStore : IDataStore<Card> {
+        private List<Card> items {
             get {
                 if (_items == null) {
                     Deck d = Deck.FullDeck(true);
                     _items = d.Cards;
                 }
+                var first = _items?.FirstOrDefault();
                 return _items;
             }
         }
-        private IOrderedEnumerable<Card> _items = null;
+        private List<Card> _items = null;
 
-        public MockDataStore() {
+        public DataStore() {
         }
 
         public async Task<Card> GetItemAsync(string itemId) {
             return await Task.FromResult(items.FirstOrDefault(s => s.ShortName == itemId));
         }
 
-        public async Task<IEnumerable<Card>> GetItemsAsync(bool forceRefresh = false) {
+        public async Task<List<Card>> GetItemsAsync(bool forceRefresh = false) {
             if (forceRefresh) _items = null;
             var ret = items;
             return await Task.FromResult(ret);

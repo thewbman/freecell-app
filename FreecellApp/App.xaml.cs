@@ -12,7 +12,7 @@ namespace FreecellApp
         public App() {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<DataStore>();
             MainPage = new AppShell();
         }
 

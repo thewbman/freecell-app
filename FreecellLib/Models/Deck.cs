@@ -42,24 +42,28 @@ namespace FreecellLib
         public Deck() {
             List<Card> c = new List<Card>();
             foreach(var s in Enum.GetValues(typeof(CardSuit)).OfType<CardSuit>()) {
-                foreach(var v in Enum.GetValues(typeof(CardValue)).OfType<CardValue>()) {
+                if (s == CardSuit.Unknown) continue;
+                foreach (var v in Enum.GetValues(typeof(CardValue)).OfType<CardValue>()) {
+                    if (v == CardValue.Default) continue;
                     c.Add(new Card(s, v));
                 }
             }
             AllCards = c.ToArray();
-            _Cards = AllCards.OrderBy(z => z.ID);
+            _Cards = AllCards.OrderBy(z => z.ID).ToList();
         }
         public Deck(CardSuit[] suits, CardValue[] values) {
             if ((suits?.Count() ?? 0) <= 0) suits = Enum.GetValues(typeof(CardSuit)).OfType<CardSuit>().ToArray();
             if ((values?.Count() ?? 0) <= 0) values = Enum.GetValues(typeof(CardValue)).OfType<CardValue>().ToArray();
             List<Card> c = new List<Card>();
             foreach (var s in suits.OrderBy(z => (int)z)) {
+                if (s == CardSuit.Unknown) continue;
                 foreach (var v in values.OrderBy(z => (int)z)) {
+                    if (v == CardValue.Default) continue;
                     c.Add(new Card(s, v));
                 }
             }
             AllCards = c.ToArray();
-            _Cards = AllCards.OrderBy(z => z.ID);
+            _Cards = AllCards.OrderBy(z => z.ID).ToList();
         }
         public Deck(CardSuit[] suits, int cntValues = c_maxValues) {
             if ((suits?.Count() ?? 0) <= 0) suits = Enum.GetValues(typeof(CardSuit)).OfType<CardSuit>().ToArray();
@@ -67,12 +71,14 @@ namespace FreecellLib
             CardValue[] values = Enum.GetValues(typeof(CardValue)).OfType<CardValue>().OrderBy(z => (int)z).Take(cntValues).ToArray();
             List<Card> c = new List<Card>();
             foreach (var s in suits.OrderBy(z => (int)z)) {
+                if (s == CardSuit.Unknown) continue;
                 foreach (var v in values.OrderBy(z => (int)z)) {
+                    if (v == CardValue.Default) continue;
                     c.Add(new Card(s, v));
                 }
             }
             AllCards = c.ToArray();
-            _Cards = AllCards.OrderBy(z => z.ID);
+            _Cards = AllCards.OrderBy(z => z.ID).ToList();
         }
 
         /// <summary>
@@ -83,16 +89,16 @@ namespace FreecellLib
         /// <summary>
         /// Ordered set of cards. On init will match AllCards, but order can be altered
         /// </summary>
-        public IOrderedEnumerable<Card> Cards {
+        public List<Card> Cards {
             get {
-                return _Cards ?? (_Cards = AllCards.OrderBy(z => z.ID));
+                return _Cards ?? (_Cards = AllCards.OrderBy(z => z.ID).ToList());
             }
         }
-        private IOrderedEnumerable<Card> _Cards = null;
+        private List<Card> _Cards = null;
 
         public bool Shuffle() {
             Random r = new Random();
-            _Cards = Cards?.OrderBy(z => r.Next());
+            _Cards = Cards?.OrderBy(z => r.Next()).ToList();
             return true;
         }
     }

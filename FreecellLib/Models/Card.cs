@@ -1,6 +1,6 @@
 ﻿namespace FreecellLib
 {
-    public class Card
+    public class Card : ICard
     {
         public override string ToString() => ShortName;
         public string DisplayName => $"{Value} of {Suit}";

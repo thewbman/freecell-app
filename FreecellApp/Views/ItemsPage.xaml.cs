@@ -27,5 +27,9 @@ namespace FreecellApp.Views
             base.OnAppearing();
             _viewModel.OnAppearing();
         }
+
+        private void RefreshDeckButton_Clicked(object sender, EventArgs e) {
+            _viewModel.ForceRefresh();
+        }
     }
 }
