@@ -8,61 +8,18 @@
              x:Name="BrowseItemsPage">
     
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout x:Name="FoundationStackLayout" Orientation="Horizontal">
-                <CollectionView x:Name="FoundationCollectionView"
-                ItemsSource="{Binding Foundations}"
-                ItemsLayout="HorizontalList"
-                >
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame BorderColor="WhiteSmoke" Padding="0" 
-                                           MinimumWidthRequest="100">
-                                    <Label Text="{Binding ShortName}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"
-                                           />
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
-            <StackLayout x:Name="CascadeStackLayout" Orientation="Horizontal" >
-                <CollectionView x:Name="CascadesCollectionView"
-                ItemsSource="{Binding Cascades}"
-                ItemsLayout="HorizontalList"
-                >
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame BorderColor="WhiteSmoke" Padding="0">
-                                <Label Text="{Binding ShortName}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
-            <StackLayout x:Name="FreecellsStackLayout" Orientation="Horizontal" >
-                <CollectionView x:Name="FreecellsCollectionView"
-                ItemsSource="{Binding Freecells}"
-                ItemsLayout="HorizontalList"
-                >
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame BorderColor="WhiteSmoke" Padding="0" 
-                                           MinimumWidthRequest="100">
-                                <Label Text="{Binding ShortName}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
-        </StackLayout>
+        <Grid Padding="1" Margin="1" x:Name="BoardPageGrid">
+            <Frame x:Name="FoundationStackFrame" Grid.Row="0" Padding="1" Margin="1" />
+            <Frame x:Name="CascadeStackFrame" Grid.Row="1" Padding="1" Margin="1" />
+            <Frame x:Name="FreecellStackFrame" Grid.Row="2" Padding="1" Margin="1" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
