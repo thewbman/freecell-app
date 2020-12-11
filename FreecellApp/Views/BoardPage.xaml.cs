@@ -1,4 +1,5 @@
 ﻿using FreecellApp.ViewModels;
+using FreecellLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace FreecellApp.Views
             //    csGrid.Children.Add(lbl);
             //}
             //CascadeStackFrame.Content = csGrid;
-            CascadeStackFrame.Content = new HorizontalCardArrayComponent(_viewModel.Cascades?.ToArray());
+            CascadeStackFrame.Content = new CascadeComponent(_viewModel.FullCascades.To2DArray());
 
             //Grid fcGrid = new Grid() { Padding = 0, Margin = 0, MinimumHeightRequest = 100 };
             //fcGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
