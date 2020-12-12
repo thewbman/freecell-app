@@ -24,10 +24,15 @@ namespace FreecellApp
                     ItemsSource = cards[i].ToList(),
                     //ItemsSource = new ICard[] { new EmptyCard() },
                     ItemTemplate = new DataTemplate(
+                        //() => { CardComponentCS cardComponentCS = new CardComponentCS(); return cardComponentCS; })
                         /*typeof(CardDataTemplate)*/
+                        //typeof(CardComponentCS))
+                        
                         () => {
                             return new CardComponent(new EmptyCard(), fontSize: 10);
+                            //return new CardComponentCS();
                         })
+                        
                 };
 
 

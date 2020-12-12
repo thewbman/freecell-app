@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreecellApp.CardComponentCS">
+    <!--
+        <Frame BorderColor="WhiteSmoke" MinimumHeightRequest="100" MinimumWidthRequest="100" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Label Text="{Binding ShortName}" MinimumHeightRequest="100" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16"/>
+        </Frame>
+    -->
+    <Label Text="adsf" />
+</ViewCell>
