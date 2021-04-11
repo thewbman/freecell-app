@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 
 namespace FreecellLib
@@ -14,13 +15,28 @@ namespace FreecellLib
             }
             return CardColor.Unknown;
         }
-        public static CardColor ToColor(this Card c) => c?.Suit.ToColor() ?? CardColor.Unknown;
+        public static CardColor ToColor(this ICard c) => c?.Suit.ToColor() ?? CardColor.Unknown;
+
+        public static Color ToBackgroundColor(this CardColor cc, bool selected = false) {
+            switch(cc) {
+                case CardColor.Black: return (selected ? Color.DarkGray :  Color.LightGray);
+                case CardColor.Red: return (selected ? Color.Orange : Color.Red);
+            }
+            return Color.Yellow;
+        }
+        public static Color ToTextColor(this CardColor cc, bool selected = false) {
+            switch (cc) {
+                case CardColor.Black: return (selected ? Color.Black : Color.Black);
+                case CardColor.Red: return (selected ? Color.WhiteSmoke : Color.White);
+            }
+            return Color.Blue;
+        }
 
         /// <summary>
         /// Single cards are places alternating colors in decreasing consecutive value
         /// </summary>
         /// <returns></returns>
-        public static bool CanBePlacedOnSingle(this Card c, Card p) {
+        public static bool CanBePlacedOnSingle(this ICard c, ICard p) {
             if (c == null || p == null) return false;
             if (c.ToColor() == p.ToColor()) return false;
             if (c.Value != (p.Value - 1)) return false;

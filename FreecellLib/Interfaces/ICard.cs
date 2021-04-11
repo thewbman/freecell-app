@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace FreecellLib
@@ -11,5 +12,10 @@ namespace FreecellLib
         int ID { get; }
         CardSuit Suit { get; }
         CardValue Value { get; }
+
+        Color TextColor { get; }
+        Color BackgroundColor { get; }
+
+        bool Selected { get; set; }
     }
 }

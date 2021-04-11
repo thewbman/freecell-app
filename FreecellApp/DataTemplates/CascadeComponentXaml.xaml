@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CollectionView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreecellApp.DataTemplates.CascadeComponentXaml" x:Name="xCascadeComponentXaml"
+             SelectionMode="Single">
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
+                <Frame BorderColor="WhiteSmoke" MinimumHeightRequest="100" MinimumWidthRequest="100" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" BackgroundColor="{Binding BackgroundColor}">
+                    <Label MinimumHeightRequest="100" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="10" Padding="0,20" 
+                           Text="{Binding ShortName}" TextColor="{Binding TextColor}"
+                           />
+                </Frame>
+            </Frame>
+            
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>

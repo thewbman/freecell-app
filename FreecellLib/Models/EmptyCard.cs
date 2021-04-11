@@ -1,15 +1,15 @@
-﻿namespace FreecellLib
-{
-    public class EmptyCard : ICard
-    {
-        public override string ToString() => ShortName;
-        public string DisplayName => $"[ ]";
-        public string ShortName => $"[ ]";
-        public int ID => (int)Suit * 100 + (int)Value;
-        public CardSuit Suit => CardSuit.Unknown;
-        public CardValue Value => CardValue.Default;
+﻿using System.Drawing;
 
-        public EmptyCard() {
-        }
+namespace FreecellLib
+{
+    public class EmptyCard : CardBase
+    {
+        public override string DisplayName => $"[ ]";
+        public override string ShortName => $"[ ]";
+
+        public override Color BackgroundColor => Color.WhiteSmoke;
+        public override Color TextColor => Color.DarkGray;
+
+        public EmptyCard() : base(CardSuit.Unknown, CardValue.Default) { }
     }
 }

@@ -10,7 +10,7 @@ namespace FreecellApp.Services
         private List<Card> items {
             get {
                 if (_items == null) {
-                    Deck d = Deck.FullDeck(false);
+                    Deck d = Deck.FullDeck(shuffle: true);
                     _items = d.Cards;
                 }
                 var first = _items?.FirstOrDefault();
