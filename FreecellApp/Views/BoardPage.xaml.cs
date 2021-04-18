@@ -37,7 +37,7 @@ namespace FreecellApp.Views
             //    fndGrid.Children.Add(lbl);
             //}
             //FoundationStackFrame.Content = fndGrid;
-            FoundationStackFrame.Content = new HorizontalCardArrayComponent(_viewModel?.Foundations?.ToArray());
+            FoundationStackFrame.Content = new HorizontalCardArrayComponent(_viewModel?.FullFoundations?.To2DList());
 
 
             //Grid csGrid = new Grid() { Padding = 0, Margin = 0, MinimumHeightRequest = 100 };
@@ -48,7 +48,7 @@ namespace FreecellApp.Views
             //    csGrid.Children.Add(lbl);
             //}
             //CascadeStackFrame.Content = csGrid;
-            CascadeStackFrame.Content = new CascadeComponent(_viewModel.FullCascades.To2DArray());
+            CascadeStackFrame.Content = new CascadeComponent(_viewModel.FullCascades.To2DList());
 
             //Grid fcGrid = new Grid() { Padding = 0, Margin = 0, MinimumHeightRequest = 100 };
             //fcGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
@@ -61,7 +61,7 @@ namespace FreecellApp.Views
             //    fcGrid.Children.Add(lbl);
             //}
             //FreecellStackFrame.Content = fcGrid;
-            FreecellStackFrame.Content = new HorizontalCardArrayComponent(_viewModel?.Freecells?.ToArray());
+            FreecellStackFrame.Content = new HorizontalCardArrayComponent(_viewModel?.Freecells?.To2DList());
         }
 
     }

@@ -45,5 +45,7 @@ namespace FreecellLib
 
         public static CardSuit[] ValidSuits => _ValidSuits ?? (_ValidSuits = Enum.GetValues(typeof(CardSuit)).OfType<CardSuit>().Except(new CardSuit[] { CardSuit.Unknown }).ToArray());
         private static CardSuit[] _ValidSuits = null;
+
+        public static ICard Empty => new EmptyCard();
     }
 }

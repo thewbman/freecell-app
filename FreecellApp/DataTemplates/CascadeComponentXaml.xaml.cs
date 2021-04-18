@@ -12,8 +12,11 @@ namespace FreecellApp.DataTemplates
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CascadeComponentXaml : CollectionView
     {
-        public CascadeComponentXaml() {
+        public CascadeComponentXaml(int col) {
+            Column = col;
             InitializeComponent();
         }
+
+        public int Column { get; private set; }
     }
 }

@@ -8,9 +8,11 @@ namespace FreecellApp
 {
     public class CascadeComponent : Grid
     {
-        private ICard[][] _Cards = null;
+        private List<List<ICard>> _Cards = null;
+        private ICard _SelectedCard = CardEx.Empty;
+        private int _SelectedCascade = -1;
 
-        public CascadeComponent(ICard[][] cards, bool showAll = false) {
+        public CascadeComponent(List<List<ICard>> cards, bool showAll = false) {
             _Cards = cards;
             //Padding = 1;
             //Margin = 1;
@@ -21,6 +23,7 @@ namespace FreecellApp
             RowSpacing = 1;
             HorizontalOptions = LayoutOptions.FillAndExpand;
             VerticalOptions = LayoutOptions.FillAndExpand;
+            BackgroundColor = Color.Gray;
 
             RefreshView();
         }
@@ -29,9 +32,9 @@ namespace FreecellApp
             this.Children.Clear();
             this.ColumnDefinitions.Clear();
 
-            for (int i = 0; i < _Cards?.Length; i++) {
+            for (int i = 0; i < _Cards?.Count; i++) {
                 this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-                var col = new DataTemplates.CascadeComponentXaml();
+                var col = new DataTemplates.CascadeComponentXaml(i);
                 col.ItemsSource = _Cards[i].ToList();
                 col.SelectionChanged += OnSelectionChanged;
 
@@ -68,15 +71,29 @@ namespace FreecellApp
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (e == null) return;
 
+            var previousCol = _SelectedCascade;
+            _SelectedCascade = (sender as DataTemplates.CascadeComponentXaml)?.Column ?? -1;
+            ICard top = (_SelectedCascade >= 0) ? _Cards[_SelectedCascade].LastOrDefault() : CardEx.Empty; // card available to play of cascade (visually on bottom but called top)
+
             ICard previous = null;
-            foreach (var c in _Cards?.SelectMany(z => z)) {
-                if (c.Selected) previous = c;
+            foreach (var c in _Cards?.SelectMany(z => z)?.Where(z => z.Selected)) {
+                //if (c.Selected) previous = c;
                 c.Selected = false;
             }
+            previous = _SelectedCard;
+
             var current = e.CurrentSelection.FirstOrDefault() as ICard;
-            if (current != null) current.Selected = true;
-            if (previous.CanBePlacedOnSingle(current)) this.BackgroundColor = Color.Green;
-            else this.BackgroundColor = Color.Yellow;
+            if ((current != null) && (top == current)) { // only allow top card in cascade to be selected
+                current.Selected = true;
+            }
+
+            if (previous == CardEx.Empty) this.BackgroundColor = Color.Gray; // nothing previously selected
+            else if (previous == current) this.BackgroundColor = Color.Gray; // same card
+            else if (previous.CanBePlacedOnSingle(current)) this.BackgroundColor = Color.Green; // move is valid
+            else this.BackgroundColor = Color.Yellow; // invalid move
+
+            _SelectedCard = current;
+
             RefreshView();
         }
     }
